@@ -1,0 +1,35 @@
+Blockchain
+
+História - 2008 - Satoshi Nakamoto.
+
+Trnasferências sem autoridade central(bancos).
+
+Estrutura em formato de cadeia.
+
+Ethereum
+ Vários nós interconectados formando uma rede.
+ Redes: Principal e secundária
+ ether - moeda da rede
+ 1 Banco de dados em cada nó da rede.
+
+Interação:
+ Desenvolvedor
+   web3.js
+
+
+ Cliente
+   Metamask
+   Mist Browser
+- Instalação do Metamask - Chrome App Store
+
+Secret Backup Pharse
+luxury shuffle stumble prize lady topic level wool harsh wolf laugh power
+
+Usar rede Ropsen
+
+0x6B77Ac075Dd0134D915647C3190Ac745Ce5Dacbc
+
+Smart Contracts - Contratos intligentes
+ 
+
+
