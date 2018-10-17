@@ -29,9 +29,11 @@ public class Servers {
     public String getClientHost() throws ServerNotActiveException {
         return TCPTransport.getClientHost();
     }
-    public void eleicao(){
-       if(servers.get(0).getId() == 0){// pegar id dos clientes - id = 0 primeiro lider
-           
-       }
-    }
+    
+//    public void eleicao() {
+//        if (servers.get(0).getId() == 0) {// pegar id dos clientes - id = 0 primeiro lider
+//
+//        }
+//    }
+    
 }

@@ -5,7 +5,7 @@
  */
 package entidades;
 
-import dao.sql.MensagemDAOSQL;
+import dao.sql.ComandoDAOSQL;
 import interfaces.Sessao;
 import java.net.InetAddress;
 import java.rmi.RemoteException;
@@ -15,11 +15,13 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import interfaces.SessaoNo;
+import java.rmi.NotBoundException;
 /**
  *
  * @author e127787
  */
-public class RMINo extends UnicastRemoteObject implements Sessao {
+public class RMINo extends UnicastRemoteObject implements SessaoNo {
 
     private RMIPrincipal rmi;
     private int porta;
@@ -29,39 +31,8 @@ public class RMINo extends UnicastRemoteObject implements Sessao {
     private String nomeServer;
     Scanner ler = new Scanner(System.in);
     
-    public int getPorta() {
-        return porta;
-    }
-
-    public void setPorta(int porta) {
-        this.porta = porta;
-    }
-
-    public String getIp() {
-        return ip;
-    }
-
-    public void setIp(String ip) {
-        this.ip = ip;
-    }
-
-    public Registry getRegistro() {
-        return registro;
-    }
-
-    public void setRegistro(Registry registro) {
-        this.registro = registro;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-    
-    public RMINo(String ipPrincipal, int portaPrincipal, String nome, int id, int porta) throws RemoteException {
+       
+    public RMINo(String ipPrincipal, int portaPrincipal, String nome, int id, int porta) throws RemoteException, NotBoundException {
         
         
         
@@ -74,6 +45,8 @@ public class RMINo extends UnicastRemoteObject implements Sessao {
         //registrando servidor atual no servidor principal - 
         //Assim no servidor criado vai estar registrado no principal
         registry = LocateRegistry.getRegistry(ipPrincipal, portaPrincipal);
+        Sessao s1 = (Sessao)(registry.lookup("Teste"));
+        System.out.println("Servidor: "+ s1);
         
         //A partir daqui ele cria um servidor para o nó
         try {
@@ -106,13 +79,13 @@ public class RMINo extends UnicastRemoteObject implements Sessao {
             System.exit(1);
         }
     }*/
-    private MensagemDAOSQL mensagemDAOSQL = new MensagemDAOSQL();
+    private ComandoDAOSQL mensagemDAOSQL = new ComandoDAOSQL();
     
     @Override
-    public void insert(Mensagem mensagem) {
+    public void comando(String comando) {
 
         try {
-            mensagemDAOSQL.insert(mensagem);
+            mensagemDAOSQL.comando(comando);
         } catch (Exception ex) {
             Logger.getLogger(RMINo.class.getName()).log(Level.SEVERE, null, ex);
         }

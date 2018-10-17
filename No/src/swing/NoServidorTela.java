@@ -13,7 +13,8 @@ import java.rmi.registry.Registry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import interfaces.Sessao;
+import interfaces.SessaoNo;
+import java.rmi.NotBoundException;
 
 /**
  *
@@ -174,7 +175,7 @@ public class NoServidorTela extends javax.swing.JFrame {
             try {
                 RMINo server = new RMINo(ipPrincipal.getText(),Integer.parseInt(portaPrincipal.getText()),txtNome.getText(), Integer.parseInt(txtId.getText()),Integer.parseInt(textPorta.getText()));
                 //server.executa();
-            } catch (RemoteException ex) {
+            } catch (RemoteException | NotBoundException ex) {
                 Logger.getLogger(NoServidorTela.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -235,7 +236,7 @@ public class NoServidorTela extends javax.swing.JFrame {
             }
         });
     }
-    Sessao rmiServer;
+    SessaoNo rmiServer;
     Registry registry;
 
 

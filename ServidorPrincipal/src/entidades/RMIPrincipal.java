@@ -7,15 +7,13 @@ package entidades;
 
 //import dao.sql.MensagemDAOSQL;
 import interfaces.Sessao;
-import java.io.Serializable;
 import java.net.InetAddress;
+import java.rmi.AccessException;
 import java.rmi.NotBoundException;
-import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -30,53 +28,18 @@ public class RMIPrincipal extends UnicastRemoteObject implements Sessao {
     private Registry registro;    // rmi registry for lookup the remote objects.
     private int id;
     private String nomeServer;
-    
-    Scanner ler = new Scanner(System.in);
-
-    public int getPorta() {
-        return porta;
-    }
-
-    public void setPorta(int porta) {
-        this.porta = porta;
-    }
-
-    public String getIp() {
-        return ip;
-    }
-
-    public void setIp(String ip) {
-        this.ip = ip;
-    }
-
-    public Registry getRegistro() {
-        return registro;
-    }
-
-    public void setRegistro(Registry registro) {
-        this.registro = registro;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public RMIPrincipal(String nome, int porta) throws RemoteException, NotBoundException {
 
-        //System.out.println("Digite o nome para o servidor:");
         this.nomeServer = nome;
         this.porta = porta;
         try {
-            // get the address of this host.
+            // Pega o ip da máquina
             ip = InetAddress.getLocalHost().getHostAddress();
         } catch (Exception e) {
             throw new RemoteException("can't get inet address.");
         }
-        //porta = 3231;  // this port(registry’s port)
+        
         System.out.println("RMIPrincipal: IP de endereço do servidor = " + ip + ", port= " + porta);
         try {
             // create the registry and bind the name and object.
@@ -97,9 +60,6 @@ public class RMIPrincipal extends UnicastRemoteObject implements Sessao {
             //Por exemplo, ao executar o arquivo atual (ESTEAQUI) ponha o nome dele de ss
             //e mude a string abaixo
             //voce verá q ocorrerá o print
-            Sessao s1 = (Sessao)(registro.lookup(this.nomeServer));
-            System.out.println(s1);
-            System.out.println("batatatatata");
 
             
         } catch (RemoteException e) {
@@ -108,36 +68,16 @@ public class RMIPrincipal extends UnicastRemoteObject implements Sessao {
 
     }
 
-    public void enviar(Serializable data) {
-
+    @Override
+    public void comando(String comando) throws RemoteException, AccessException {
+        try {
+            Sessao name = (Sessao) (registro.lookup("No1"));
+            name.comando(comando);
+//            for(String s : registro.list())
+//                System.out.println(s);
+        } catch (NotBoundException ex) {
+            Logger.getLogger(RMIPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-
-//    static public void main(String args[]) {
-//        Scanner ler = new Scanner(System.in);
-//        int id = 1;
-//        System.out.println("Digite o numero da porta:");
-//        int porta = ler.nextInt();
-//        System.out.println("Digite o nome do servidor:");
-//        String nome = ler.nextLine();
-//        try {
-//            RMIPrincipal s = new RMIPrincipal(nome, id, porta);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            System.exit(1);
-//        }
-//    }
-//
-//    private MensagemDAOSQL mensagemDAOSQL = new MensagemDAOSQL();
-//
-//    @Override
-//    public void insert(Mensagem mensagem) {
-//
-//        try {
-//            mensagemDAOSQL.insert(mensagem);
-//        } catch (Exception ex) {
-//            Logger.getLogger(RMIPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//
-//    }
 
 }

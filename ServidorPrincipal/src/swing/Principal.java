@@ -45,7 +45,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        btnCad.setText("???");
+        btnCad.setText("Cliente");
         btnCad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCadActionPerformed(evt);
@@ -57,20 +57,20 @@ public class Principal extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(157, 157, 157)
+                .addGap(46, 46, 46)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnCad)
+                    .addComponent(btnCad, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnServer))
-                .addContainerGap(170, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(80, 80, 80)
+                .addGap(25, 25, 25)
                 .addComponent(btnServer)
-                .addGap(83, 83, 83)
+                .addGap(33, 33, 33)
                 .addComponent(btnCad)
-                .addContainerGap(91, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         pack();
@@ -83,7 +83,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void btnCadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadActionPerformed
         this.dispose();
-        //CadastroTela.getInstance().setVisible(true);
+        new ClienteTela().setVisible(true);
     }//GEN-LAST:event_btnCadActionPerformed
 
     /**

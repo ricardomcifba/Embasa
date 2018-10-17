@@ -5,7 +5,6 @@
  */
 package blockchain;
 
-import entidades.Mensagem;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -30,12 +29,6 @@ public class Block {
         this.hash = calculateHash(); //Making sure we do this after we set the other values.
     }
 
-    public Block(Mensagem data, String previousHash) {
-        this.data = data.toString();
-        this.previousHash = previousHash;
-        this.timeStamp = new Date().getTime();
-        this.hash = calculateHash(); //Making sure we do this after we set the other values.
-    }
     
     public String calculateHash() {
         String calculatedhash = StringUtil.applySha256(

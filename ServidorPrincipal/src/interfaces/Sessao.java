@@ -15,7 +15,7 @@ import java.rmi.RemoteException;
  */
 public interface Sessao extends Remote{
   
-    //public void insert(Mensagem mensagem) throws RemoteException;
+    public void comando(String comando) throws RemoteException;
     
     
 }

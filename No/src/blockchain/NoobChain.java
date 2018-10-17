@@ -5,7 +5,6 @@
  */
 package blockchain;
 
-import entidades.Mensagem;
 import java.util.ArrayList;
 import com.google.gson.GsonBuilder;
 
@@ -19,9 +18,9 @@ public class NoobChain {
 
     public static void main(String[] args) {
         
-        Mensagem m1 = new Mensagem(1, "Teste de banco");
-        Mensagem m2 = new Mensagem(2, "Teste de banco");
-        Mensagem m3 = new Mensagem(3, "Teste de banco");
+        String m1 = new String("Teste de banco 1");
+        String m2 = new String("Teste de banco 2");
+        String m3 = new String("Teste de banco 3");
 
         blockchain.add(new Block(m1, "0"));
         blockchain.add(new Block(m2, blockchain.get(blockchain.size() - 1).hash));

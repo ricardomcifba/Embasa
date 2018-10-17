@@ -3,8 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/H:/IFBA/5º%20Semestre/Sistemas%20Distribuidos/Distribuidos-master/ServidorPrincipal/src/swing/ServidorTela.java</file>
-            <file>file:/H:/IFBA/5º%20Semestre/Sistemas%20Distribuidos/Distribuidos-master/ServidorPrincipal/src/entidades/RMIPrincipal.java</file>
+            <file>file:/E:/IFBA/5º%20Semestre/Sistemas%20Distribuidos/Distribuidos-master/ServidorPrincipal/src/swing/ClienteTela.java</file>
+            <file>file:/E:/IFBA/5º%20Semestre/Sistemas%20Distribuidos/Distribuidos-master/ServidorPrincipal/src/entidades/Cliente.java</file>
+            <file>file:/E:/IFBA/5º%20Semestre/Sistemas%20Distribuidos/Distribuidos-master/ServidorPrincipal/src/swing/Principal.java</file>
+            <file>file:/E:/IFBA/5º%20Semestre/Sistemas%20Distribuidos/Distribuidos-master/ServidorPrincipal/src/entidades/RMIPrincipal.java</file>
+            <file>file:/E:/IFBA/5º%20Semestre/Sistemas%20Distribuidos/Distribuidos-master/ServidorPrincipal/src/swing/ServidorTela.java</file>
+            <file>file:/E:/IFBA/5º%20Semestre/Sistemas%20Distribuidos/Distribuidos-master/ServidorPrincipal/src/interfaces/Sessao.java</file>
         </group>
     </open-files>
 </project-private>
