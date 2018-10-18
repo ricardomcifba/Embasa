@@ -6,6 +6,9 @@
 package swing;
 
 import entidades.Cliente;
+import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -37,7 +40,7 @@ public class ClienteTela extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        textComando = new javax.swing.JTextArea();
         jLabel4 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
 
@@ -56,15 +59,20 @@ public class ClienteTela extends javax.swing.JFrame {
 
         jLabel3.setText("Nome Servidor:");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        textComando.setColumns(20);
+        textComando.setRows(5);
+        jScrollPane1.setViewportView(textComando);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel4.setText("Comando SQL");
         jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jButton2.setText("Executar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -120,8 +128,18 @@ public class ClienteTela extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        //cliente conecta no servidor principal
         cliente = new Cliente(txtNome.getText(), txtIp.getText(), Integer.parseInt(txtPorta.getText()));
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        comando = textComando.getText();
+        try {
+            cliente.enviar(comando);// TODO add your handling code here:
+        } catch (RemoteException ex) {
+            Logger.getLogger(ClienteTela.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -158,6 +176,7 @@ public class ClienteTela extends javax.swing.JFrame {
         });
     }
     private Cliente cliente = null;
+    private String comando = "";
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -166,7 +185,7 @@ public class ClienteTela extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea textComando;
     private javax.swing.JTextField txtIp;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtPorta;

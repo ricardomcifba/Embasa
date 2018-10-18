@@ -16,6 +16,7 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import interfaces.SessaoNo;
+import java.rmi.AlreadyBoundException;
 import java.rmi.NotBoundException;
 /**
  *
@@ -29,10 +30,11 @@ public class RMINo extends UnicastRemoteObject implements SessaoNo {
     private Registry registro;    // rmi registry for lookup the remote objects.
     private int id;
     private String nomeServer;
+    private static RMINo instance = null;
     Scanner ler = new Scanner(System.in);
     
        
-    public RMINo(String ipPrincipal, int portaPrincipal, String nome, int id, int porta) throws RemoteException, NotBoundException {
+    public RMINo(String ipPrincipal, int portaPrincipal, String nome, int id, int porta) throws RemoteException, NotBoundException, AlreadyBoundException {
         
         
         
@@ -41,10 +43,18 @@ public class RMINo extends UnicastRemoteObject implements SessaoNo {
         this.nomeServer = nome;
         this.porta = porta;
         this.id = id;
+        instance = this;
         
         //registrando servidor atual no servidor principal - 
         //Assim no servidor criado vai estar registrado no principal
+        //System.setProperty("principal",ipPrincipal);
         registry = LocateRegistry.getRegistry(ipPrincipal, portaPrincipal);
+        
+       // for(String s : registry.list())
+       //     System.out.println(s);
+        
+        //registry.rebind("No1", this);
+        
         Sessao s1 = (Sessao)(registry.lookup("Teste"));
         System.out.println("Servidor: "+ s1);
         
@@ -61,6 +71,7 @@ public class RMINo extends UnicastRemoteObject implements SessaoNo {
             // create the registry and bind the name and object.
             registro = LocateRegistry.createRegistry(porta);
             registro.rebind(nomeServer, this);
+
         } catch (RemoteException e) {
             throw e;
         }
@@ -83,7 +94,7 @@ public class RMINo extends UnicastRemoteObject implements SessaoNo {
     
     @Override
     public void comando(String comando) {
-
+        //Criar implementação do blockchain
         try {
             mensagemDAOSQL.comando(comando);
         } catch (Exception ex) {

@@ -7,6 +7,7 @@ package entidades;
 
 //import dao.sql.MensagemDAOSQL;
 import interfaces.Sessao;
+import interfaces.SessaoNo;
 import java.net.InetAddress;
 import java.rmi.AccessException;
 import java.rmi.NotBoundException;
@@ -28,11 +29,14 @@ public class RMIPrincipal extends UnicastRemoteObject implements Sessao {
     private Registry registro;    // rmi registry for lookup the remote objects.
     private int id;
     private String nomeServer;
+    private static RMIPrincipal instance = null;
 
     public RMIPrincipal(String nome, int porta) throws RemoteException, NotBoundException {
 
         this.nomeServer = nome;
         this.porta = porta;
+        instance = this;
+        
         try {
             // Pega o ip da máquina
             ip = InetAddress.getLocalHost().getHostAddress();
@@ -44,8 +48,7 @@ public class RMIPrincipal extends UnicastRemoteObject implements Sessao {
         try {
             // create the registry and bind the name and object.
             registro = LocateRegistry.createRegistry(porta);
-            registro.rebind(nomeServer, this);
-            
+            registro.rebind(nomeServer, instance);
             //O REGISTRO TEM Q SER O MESMO DO RMISERVER, ARRUMAR ALGUMA FORMA DE COMPARTILHA-LO 
             //OU CONECTAR O RMI SERVER AO MESMO DO DE CÁ
             //OU TRAZER ESSE SERVER PARA O OUTRO CÓDIGO
@@ -71,7 +74,10 @@ public class RMIPrincipal extends UnicastRemoteObject implements Sessao {
     @Override
     public void comando(String comando) throws RemoteException, AccessException {
         try {
-            Sessao name = (Sessao) (registro.lookup("No1"));
+            
+            Registry registry = LocateRegistry.getRegistry("localhost", 2345);
+
+            SessaoNo name = (SessaoNo) (registry.lookup("No1"));
             name.comando(comando);
 //            for(String s : registro.list())
 //                System.out.println(s);

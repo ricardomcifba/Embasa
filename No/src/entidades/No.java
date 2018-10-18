@@ -17,7 +17,7 @@ public class No {
         String rmiAddress = ip;
         String rmiNome = nome;        
 
-        String m1 = new String("Create table teste (comando varchar);");
+        String m1 = new String("Create table teste (comando varchar)");
 
         try {
             // get the “registry” 
@@ -38,8 +38,8 @@ public class No {
 
     }
     
-    public static void main (String args[]){        
-        No no = new No(1234,"localhost", "Teste" );        
-    }
+    /*public static void main (String args[]){        
+        No no = new No(2345,"localhost", "No1" );        
+    }*/
     
 }

@@ -19,9 +19,9 @@ public class ComandoDAOSQL extends GenericDAO implements ComandoDAO{
     
     @Override
     public void comando(String comando) throws Exception {
-        PreparedStatement pStmt = this.getConnection().prepareStatement(ComandoDAOSQL.COMANDO);
-        pStmt.setString(1, comando);
-        pStmt.executeUpdate();
+        PreparedStatement pStmt = this.getConnection().prepareStatement(comando);
+        //pStmt.setString(1, comando);
+        pStmt.executeUpdate();;
         
     }
     
