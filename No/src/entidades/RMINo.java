@@ -70,7 +70,7 @@ public class RMINo extends UnicastRemoteObject implements SessaoNo {
         try {
             // create the registry and bind the name and object.
             registro = LocateRegistry.createRegistry(porta);
-            registro.rebind(nomeServer, this);
+            registro.rebind(nomeServer, instance);
 
         } catch (RemoteException e) {
             throw e;

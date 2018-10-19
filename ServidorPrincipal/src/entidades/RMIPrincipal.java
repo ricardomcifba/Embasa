@@ -15,6 +15,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -26,9 +27,12 @@ public class RMIPrincipal extends UnicastRemoteObject implements Sessao {
 
     private int porta;
     private String ip;
-    private Registry registro;    // rmi registry for lookup the remote objects.
+    private Registry registro; // rmi registry for lookup the remote objects.
+    private ArrayList<Registry> registries = new ArrayList<Registry>();// Lista de Registros
+    private Registry registry; // registra servidor externo   
     private int id;
     private String nomeServer;
+    //criado atributo estático para evitar que o garbage collector elimine por achar que não está sendo mais usado
     private static RMIPrincipal instance = null;
 
     public RMIPrincipal(String nome, int porta) throws RemoteException, NotBoundException {
@@ -71,19 +75,42 @@ public class RMIPrincipal extends UnicastRemoteObject implements Sessao {
 
     }
 
-    @Override
+    @Override //classe que envia os comandos sql do servidor principal para os remotos.
     public void comando(String comando) throws RemoteException, AccessException {
         try {
-            
-            Registry registry = LocateRegistry.getRegistry("localhost", 2345);
-
+            //alterar para mandar para o líder
+            registry = LocateRegistry.getRegistry("localhost", 2345);
+            //alterar para prgar o nome do lider 
             SessaoNo name = (SessaoNo) (registry.lookup("No1"));
             name.comando(comando);
-//            for(String s : registro.list())
-//                System.out.println(s);
         } catch (NotBoundException ex) {
             Logger.getLogger(RMIPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    //Como os Servidores nós já se registram no principal a partir da conexção
+    //essa parte d ocódigo está sendo utilizada para adicionar os nós na lista de nós Registrados
+    public void addRegistro(String ip, int porta) throws RemoteException {
+        registry = LocateRegistry.getRegistry(ip, porta);
+        registries.add(registry);
+    }
+    
+    //Lista os nós registrados
+    public void listarRegistros() throws RemoteException{
+        for(int i = 0; i < registries.size(); i++){
+            for(String s : registries.get(i).list())
+                System.out.println(s);            
+            //String[] s = registries.get(i).list();
+            //System.out.println(s);
+        }
+    }
+    
+    public void eleigerLider(){
+        registries.get(0);                                            
+    }
+    
+    public void removeRegistro(Registry reg){
+        registries.remove(reg);
     }
 
 }
