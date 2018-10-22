@@ -75,8 +75,10 @@ public class RMIPrincipal extends UnicastRemoteObject implements Sessao {
 
     }
 
-    @Override //classe que envia os comandos sql do servidor principal para os remotos.
+    @Override 
     public void comando(String comando) throws RemoteException, AccessException {
+        //classe que envia os comandos sql do servidor principal para os remotos.
+        //mudar para enviar para o lider
         try {
             //alterar para mandar para o líder
             registry = LocateRegistry.getRegistry("localhost", 2345);
@@ -101,7 +103,7 @@ public class RMIPrincipal extends UnicastRemoteObject implements Sessao {
             for(String s : registries.get(i).list())
                 System.out.println(s);            
             //String[] s = registries.get(i).list();
-            //System.out.println(s);
+            System.out.println(registries.get(i).list());
         }
     }
     

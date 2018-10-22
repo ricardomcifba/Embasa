@@ -26,8 +26,6 @@ public class Cliente {
         String rmiAddress = ip;
         String rmiNome = nome;
         
-        //String m1 = new String("insert into mensagem(id,mensagem) values(3,\'rick\')");
-
         try {
             // get the “registry” 
             registry = LocateRegistry.getRegistry(
@@ -37,12 +35,7 @@ public class Cliente {
 
             // look up the remote object 
             rmiServer = (Sessao) (registry.lookup(rmiNome));
-            //System.out.println(rmiServer);
-            //rmiServer.comando(m1);
-            // call the remote method
-            //rmiServer.addAluno(a1);//Adiciona A,luno
-            //rmiServer.find(nome);// Procura pelo nome
-            //rmiServer.removeAluno(nome); //remove aluno pelo nome
+
             
         } catch (RemoteException e) {
             e.printStackTrace();
@@ -51,12 +44,6 @@ public class Cliente {
         }
 
     }
-    
-    /*public static void main(String[] args) {
-    
-        Cliente c = new Cliente("Teste", "localhost", 1234);
-    
-    }*/
     
     public void enviar(String enviar) throws RemoteException{
         rmiServer.comando(enviar);

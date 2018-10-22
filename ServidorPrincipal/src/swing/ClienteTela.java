@@ -22,6 +22,13 @@ public class ClienteTela extends javax.swing.JFrame {
     public ClienteTela() {
         initComponents();
     }
+    
+    public static ClienteTela getInstance() {
+        if (instance == null) {
+            instance = new ClienteTela();
+        }
+        return instance;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -175,6 +182,7 @@ public class ClienteTela extends javax.swing.JFrame {
             }
         });
     }
+    private static ClienteTela instance = null;
     private Cliente cliente = null;
     private String comando = "";
     // Variables declaration - do not modify//GEN-BEGIN:variables

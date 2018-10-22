@@ -5,6 +5,7 @@
  */
 package interfaces;
 
+import blockchain.Block;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
@@ -15,5 +16,5 @@ import java.rmi.RemoteException;
 public interface SessaoNo extends Remote{
   
     public void comando(String comando) throws RemoteException;
-    
+//    public void insertBC(Block block)  throws RemoteException;    
 }

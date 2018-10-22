@@ -5,6 +5,9 @@
  */
 package interfaces;
 
+import blockchain.Block;
+
+
 /**
  *
  * @author Aluno
@@ -12,4 +15,5 @@ package interfaces;
 public interface ComandoDAO {
 
     public void comando (String comando) throws Exception;
+//    public void insertBC(Block block)  throws Exception;
 }

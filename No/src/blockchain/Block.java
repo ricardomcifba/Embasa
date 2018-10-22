@@ -16,6 +16,22 @@ public class Block {
     
     public static ArrayList<Block> blockchain = new ArrayList<Block>();
 
+    public String getHash() {
+        return hash;
+    }
+
+    public String getPreviousHash() {
+        return previousHash;
+    }
+
+    public String getData() {
+        return data;
+    }
+
+    public long getTimeStamp() {
+        return timeStamp;
+    }
+
     public String hash;
     public String previousHash;
     private String data; //our data will be a simple message.

@@ -9,20 +9,30 @@ import dao.GenericDAO;
 import java.sql.PreparedStatement;
 import interfaces.ComandoDAO;
 
+
 /**
  *
  * @author Aluno
  */
 public class ComandoDAOSQL extends GenericDAO implements ComandoDAO{
     
-    private static final String COMANDO = "?";
+    private static final String INSERT = "insert into blockchain(hash, previous, comando, timestamps) values (?,?,?,?)";
+     
     
     @Override
     public void comando(String comando) throws Exception {
         PreparedStatement pStmt = this.getConnection().prepareStatement(comando);
-        //pStmt.setString(1, comando);
-        pStmt.executeUpdate();;
+        pStmt.execute();
         
     }
+
+//    public void insertBC(Block block) throws Exception {
+//        PreparedStatement pStmt = this.getConnection().prepareStatement(INSERT);
+//        pStmt.setString(1, block.getHash());
+//        pStmt.setString(2, block.getPreviousHash());
+//        pStmt.setString(3, block.getData());
+//        pStmt.setLong(4, block.getTimeStamp());
+//        pStmt.executeUpdate();
+//    }
     
 }

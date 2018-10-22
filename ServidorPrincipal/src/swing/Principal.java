@@ -77,13 +77,13 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnServerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnServerActionPerformed
-            this.dispose();
-            new ServidorTela().setVisible(true);
+        this.dispose();
+        ServidorTela.getInstance().setVisible(true);
     }//GEN-LAST:event_btnServerActionPerformed
 
     private void btnCadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadActionPerformed
         this.dispose();
-        new ClienteTela().setVisible(true);
+        ClienteTela.getInstance().setVisible(true);
     }//GEN-LAST:event_btnCadActionPerformed
 
     /**

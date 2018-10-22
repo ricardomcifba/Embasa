@@ -6,15 +6,16 @@
 package servers;
 
 import entidades.RMIPrincipal;
-import java.rmi.server.ServerNotActiveException;
 import java.util.ArrayList;
-import sun.rmi.transport.tcp.TCPTransport;
+
 
 /**
  *
  * @author Aluno
  */
 public class Servers {
+    
+    
     private ArrayList<RMIPrincipal> servers = new ArrayList<RMIPrincipal>();
 
     
@@ -24,10 +25,6 @@ public class Servers {
     
     public void removeServer(RMIPrincipal rmiserver){
         servers.remove(rmiserver);
-    }
-    
-    public String getClientHost() throws ServerNotActiveException {
-        return TCPTransport.getClientHost();
     }
     
 //    public void eleicao() {
