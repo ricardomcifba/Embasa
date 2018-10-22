@@ -6,7 +6,7 @@
 package entidades;
 
 import blockchain.Block;
-import static blockchain.NoobChain.blockchain;
+import static blockchain.Teste.blockchain;
 import com.google.gson.GsonBuilder;
 import dao.sql.ComandoDAOSQL;
 import java.net.InetAddress;
@@ -141,4 +141,16 @@ public class RMINo extends UnicastRemoteObject implements SessaoNo {
         System.out.println(blockchainJson);
     }
     
+    public boolean areOn(Registry reg){
+        return false;//inplementar
+    }
+    
+    public boolean liderOn(Registry reg){
+        return false;//implementar
+    }
+    
+    public void sendToGroup(Registry reg, String comando){
+        //if(areOn(reg))
+            
+    }
 }

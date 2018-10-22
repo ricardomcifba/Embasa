@@ -5,7 +5,6 @@
  */
 package entidades;
 
-//import dao.sql.MensagemDAOSQL;
 import interfaces.Sessao;
 import interfaces.SessaoNo;
 import java.net.InetAddress;
@@ -81,6 +80,7 @@ public class RMIPrincipal extends UnicastRemoteObject implements Sessao {
         //mudar para enviar para o lider
         try {
             //alterar para mandar para o líder
+
             registry = LocateRegistry.getRegistry("localhost", 2345);
             //alterar para prgar o nome do lider 
             SessaoNo name = (SessaoNo) (registry.lookup("No1"));
@@ -103,11 +103,11 @@ public class RMIPrincipal extends UnicastRemoteObject implements Sessao {
             for(String s : registries.get(i).list())
                 System.out.println(s);            
             //String[] s = registries.get(i).list();
-            System.out.println(registries.get(i).list());
+            //System.out.println(registries.get(i).list());
         }
     }
     
-    public void eleigerLider(){
+    public void elegerLider(){
         registries.get(0);                                            
     }
     
